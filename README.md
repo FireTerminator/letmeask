@@ -1,6 +1,6 @@
 # Letmeask 
 
-Project developed during rocketseat's next level week together event.
+Project developed during rocketseat's next level week event.
 
 ### Technologies
 1. [React js](https://reactjs.org/)
