@@ -4,9 +4,14 @@
   box-sizing: border-box;
 }
 
+:root {
+  --background-color: #f8f8f8;
+  --text-color: #29292e;
+}
+
 body {
-  background: #f8f8f8;
-  color: #29292e;
+  background: var(--background-color);
+  color: var(--text-color);
 }
 
 body, input, button, textarea {

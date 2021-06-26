@@ -1,5 +1,6 @@
 import {FormEvent, useState} from 'react';
 import {useHistory} from 'react-router-dom';
+import Switch  from 'react-switch';
 
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
@@ -10,13 +11,15 @@ import '../styles/auth.scss';
 import { Button } from '../components/Button';
 import { useAuth } from '../hooks/useAuth';
 import { database } from '../services/firebase';
+import { useTheme } from '../hooks/useTheme';
 
 
 export function Home() {
   const history = useHistory();
   const {user, signInWithGoogle} = useAuth();
+  const {theme, toggleTheme} = useTheme();
   const [roomCode, setRoomCode] = useState('');
-
+  const [switchTheme, setSwitchTheme] = useState(false);
   async function handleCreateRoom() {
     if(!user) {
       await signInWithGoogle()
@@ -47,8 +50,18 @@ export function Home() {
     history.push(`/rooms/${roomCode}`);
   } 
 
+  function handleSwitchTheme() {
+    if(switchTheme) {
+      toggleTheme();
+      setSwitchTheme(false);
+    } else {
+      toggleTheme();
+      setSwitchTheme(true);
+    }
+  }
+
   return(
-    <div id="page-auth">
+    <div id="page-auth" className={theme}>
       <aside>
         <img src={illustrationImg} alt="Ilustração simbolizando  perguntas e respostas" />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>
@@ -56,6 +69,18 @@ export function Home() {
       </aside>
       <main>
         <div className="main-content">
+          <div className="theme-switcher">
+            <h1>tema {theme}</h1>
+            <Switch 
+              onChange= {handleSwitchTheme} 
+              checked={switchTheme}
+              checkedIcon={false}
+              uncheckedIcon={false}
+              onColor={'#FFF'}
+              onHandleColor={'#888888'}
+              ></Switch>
+            {/* <button onClick={toggleTheme}>Troca tema</button> */}
+          </div>
           <img src={logoImg} alt="Letmeask" />
           <button onClick={handleCreateRoom} className="create-room">
             <img src={googleIconImg} alt="Logo do google" />

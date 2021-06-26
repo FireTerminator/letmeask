@@ -3,6 +3,10 @@
   align-items: stretch;
   height: 100vh;
 
+  // &.dark {
+  //   background: #2b2b2b;
+  // }
+
   aside {
     flex: 7;
     
@@ -50,6 +54,10 @@
     max-width: 320px;
     align-items: stretch;
     text-align: center;
+
+    .theme-switcher {
+      margin-bottom: 100px;
+    }
 
     > img {
       align-self: center;
